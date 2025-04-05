@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editkaro.in - Creative Video Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        /* Header Styles with Animation */
+        header {
+            padding: 2rem;
+            text-align: center;
+            animation: gradientBG 10s ease infinite;
+            background: linear-gradient(45deg, #ff0066, #00ccff, #ffcc00, #ff0066);
+            background-size: 400% 400%;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Filter Buttons */
+        .filter-container {
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            margin: 0.3rem;
+            border: none;
+            background: #333;
+            color: #fff;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: #ff0066;
+            transform: scale(1.05);
+        }
+
+        /* Portfolio Grid */
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .portfolio-item:hover {
+            transform: scale(1.03);
+        }
+
+        .portfolio-item video {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 1rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .portfolio-item:hover .overlay {
+            transform: translateY(0);
+        }
+
+        .overlay h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #fff;
+            font-size: 2rem;
+            cursor: pointer;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 3rem 2rem;
+            text-align: center;
+            background: #151515;
+        }
+
+        .contact-section h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #ff0066;
+        }
+
+        .contact-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #00ccff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            background: #ff0066;
+            transform: translateY(-3px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .filter-btn {
+                padding: 0.4rem 0.8rem;
+                font-size: 0.9rem;
+            }
+
+            .contact-section h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Editkaro.in Portfolio</h1>
+        <p>Social Media Marketing & Video Editing Agency</p>
+    </header>
+
+    <div class="filter-container">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="short-form">Short Form</button>
+        <button class="filter-btn" data-category="long-form">Long Form</button>
+        <button class="filter-btn" data-category="gaming">Gaming</button>
+        <button class="filter-btn" data-category="football">Football</button>
+        <button class="filter-btn" data-category="ecommerce">eCommerce</button>
+        <button class="filter-btn" data-category="documentary">Documentary</button>
+        <button class="filter-btn" data-category="color-grading">Color Grading</button>
+        <button class="filter-btn" data-category="anime">Anime</button>
+        <button class="filter-btn" data-category="ads">Ads</button>
+    </div>
+
+    <div class="portfolio-grid">
+        <div class="portfolio-item" data-category="short-form">
+            <video src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" muted></video>
+            <div class="overlay">
+                <h3>Short Form Reel</h3>
+                <p>Social Media Content</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="gaming">
+            <video src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" muted></video>
+            <div class="overlay">
+                <h3>Gaming Montage</h3>
+                <p>Action Highlights</p>
+            </div>
+        </div>
+
+        <div class="portfolio-item" data-category="football">
+            <video src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" muted></video>
+            <div class="overlay">
+                <h3>Football Edit</h3>
+                <p>Match Highlights</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox">
+        <span class="close-btn">×</span>
+        <video class="lightbox-content" controls></video>
+    </div>
+
+    <section class="contact-section">
+        <h2>Want to See More?</h2>
+        <p>Contact us for more details about our video editing services</p>
+        <a href="mailto:contact@editkaro.in" class="contact-btn">Contact Us</a>
+    </section>
+
+    <script>
+        // Filter Functionality with Animation
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const category = button.dataset.category;
+
+                // Update active button
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+
+                // Filter items with animation
+                portfolioItems.forEach((item, index) => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+                        item.style.animation = 'none'; // Reset animation
+                        setTimeout(() => {
+                            item.style.animation = `slideIn 0.5s ease forwards ${index * 0.1}s`;
+                        }, 10);
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Initial animation on page load
+        portfolioItems.forEach((item, index) => {
+            item.style.animation = `slideIn 0.5s ease forwards ${index * 0.1}s`;
+        });
+
+        // Lightbox Functionality
+        const lightbox = document.querySelector('.lightbox');
+        const lightboxVideo = document.querySelector('.lightbox-content');
+        const closeBtn = document.querySelector('.close-btn');
+
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const videoSrc = item.querySelector('video').src;
+                lightboxVideo.src = videoSrc;
+                lightbox.style.display = 'flex';
+            });
+        });
+
+        closeBtn.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            lightboxVideo.pause();
+        });
+
+        // Play video on hover
+        portfolioItems.forEach(item => {
+            const video = item.querySelector('video');
+            item.addEventListener('mouseenter', () => video.play());
+            item.addEventListener('mouseleave', () => video.pause());
+        });
+    </script>
+</body>
+</html>
